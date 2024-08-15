@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:three_fold_connect/daily_transactions/presentation/pages/daily_transactions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,10 +29,23 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF1AA18F),
+          titleTextStyle: TextStyle(color: Colors.white),
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        scaffoldBackgroundColor: const Color(0xFF383434),
+        primaryColor: const Color(0xFF1AA18F),
+        iconTheme: const IconThemeData(color: Colors.white),
+        textTheme: const TextTheme(
+          headlineMedium: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const DailyTransactionsPage(),
     );
   }
 }
