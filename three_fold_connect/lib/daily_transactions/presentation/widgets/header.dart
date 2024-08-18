@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class WalletInfoHeader extends StatelessWidget {
   final String email;
@@ -9,24 +8,36 @@ class WalletInfoHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Column(
-      children: [
-        SizedBox(
-            child: Row(
-          children: [
-            Icon(Icons.wallet),
-            Expanded(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          const Icon(Icons.wallet),
+          Expanded(
+            child: Align(
+              alignment: Alignment.center,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Daily Transactions'),
-                  Text(email),
+                  const Text(
+                    'Daily Transactions',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    email,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
-            )
-          ],
-        ))
-      ],
-    ));
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
