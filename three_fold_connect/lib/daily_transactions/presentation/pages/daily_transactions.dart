@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/filter.dart';
 import '../widgets/transaction.dart';
+import '../widgets/vertical_divider.dart';
 import '/widgets/app_bar.dart';
 
 import '../widgets/header.dart';
@@ -10,7 +11,7 @@ class DailyTransactionsPage extends StatefulWidget {
   const DailyTransactionsPage({super.key});
 
   @override
-  _DailyTransactionsPageState createState() => _DailyTransactionsPageState();
+  State<DailyTransactionsPage> createState() => _DailyTransactionsPageState();
 }
 
 class _DailyTransactionsPageState extends State<DailyTransactionsPage> {
@@ -44,13 +45,20 @@ class _DailyTransactionsPageState extends State<DailyTransactionsPage> {
               child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return TransactionWidget(
-                    isIncoming: index % 2 == 0,
-                    status: "Completed",
-                    transactionId:
-                        'VerlyLongTransacationIDkfuiuaiuagigiuagiuwaghwag $index',
-                    tftAmount: 100.0 + index,
-                    date: '2022-01-0${index + 1}',
+                  return Column(
+                    children: [
+                      TransactionWidget(
+                        isIncoming: index % 2 == 0,
+                        status: "Completed",
+                        transactionId:
+                            'VerlyLongTransacationIDkfuiuaiuagigiuagiuwaghwag $index',
+                        tftAmount: 100.0 + index,
+                        date: '2022-01-0${index + 1}',
+                      ),
+                      index != 9
+                          ? const CustomVerticalDivider()
+                          : const SizedBox(),
+                    ],
                   );
                 },
               ),
