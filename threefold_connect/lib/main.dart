@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:threefold_connect/features/dao%20page/presentation/pages/dao_page.dart';
 import 'package:threefold_connect/theme/theme.dart';
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
            theme: threefoldTheme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const DaoPage(),
     );
   }
 }
