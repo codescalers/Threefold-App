@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/filter.dart';
+import '../widgets/footer.dart';
 import '../widgets/transaction.dart';
 import '../widgets/vertical_divider.dart';
 import '/widgets/app_bar.dart';
@@ -63,6 +64,7 @@ class _DailyTransactionsPageState extends State<DailyTransactionsPage> {
                 },
               ),
             ),
+            const Footer(),
           ],
         ),
       ),

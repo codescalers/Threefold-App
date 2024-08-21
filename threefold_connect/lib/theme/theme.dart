@@ -9,6 +9,7 @@ const backgroundColor = Color(0xFF383434);
 const white = Color(0xFFFFFFFF);
 const darkred = Color(0xFFA11A1A);
 const grey = Color(0xFF818181);
+const brightRed = Color.fromARGB(255, 255, 0, 0);
 
 // Fonts
 var poppins = GoogleFonts.poppins().fontFamily;

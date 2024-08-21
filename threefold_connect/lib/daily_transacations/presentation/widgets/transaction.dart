@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:threefold_connect/theme/theme.dart';
 
 class TransactionWidget extends StatelessWidget {
   final bool isIncoming;
@@ -24,9 +25,9 @@ class TransactionWidget extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor:
-                isIncoming ? Theme.of(context).primaryColor : Colors.red,
+                isIncoming ? Theme.of(context).primaryColor : brightRed,
             child: Icon(
-              isIncoming ? Icons.arrow_downward : Icons.arrow_outward,
+              isIncoming ? Icons.arrow_downward : Icons.arrow_upward,
               color: Colors.white,
             ),
           ),
@@ -50,9 +51,7 @@ class TransactionWidget extends StatelessWidget {
                       'TFT $tftAmount',
                       style: TextStyle(
                         fontSize: 14,
-                        color: isIncoming
-                            ? Theme.of(context).primaryColor
-                            : Colors.red,
+                        color: isIncoming ? Colors.green : Colors.red,
                       ),
                     ),
                     Text(
