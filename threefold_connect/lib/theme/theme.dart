@@ -15,8 +15,16 @@ var poppins = GoogleFonts.poppins().fontFamily;
 var inter = GoogleFonts.inter().fontFamily;
 var interBold = GoogleFonts.inter(fontWeight: FontWeight.bold).fontFamily;
 
-
 ThemeData threefoldTheme = ThemeData(
+  appBarTheme: const AppBarTheme(
+    backgroundColor: secondryColor,
+    titleTextStyle: TextStyle(
+      color: white,
+    ),
+    iconTheme: IconThemeData(
+      color: white,
+    ),
+  ),
   fontFamily: GoogleFonts.notoSans().fontFamily,
   scaffoldBackgroundColor: backgroundColor,
   colorScheme: ColorScheme.fromSeed(
@@ -26,4 +34,5 @@ ThemeData threefoldTheme = ThemeData(
     tertiary: teritaryColor,
     surfaceTint: Colors.transparent,
   ),
+  textTheme: const TextTheme(headlineMedium: TextStyle(color: white)),
 );
