@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:threefold_connect/daily_transacations/presentation/pages/daily_transaction.dart';
 import 'package:threefold_connect/theme/theme.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-           theme: threefoldTheme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: threefoldTheme,
+      home: const DailyTransactionsPage(),
     );
   }
 }
