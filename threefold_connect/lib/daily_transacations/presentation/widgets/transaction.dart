@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:threefold_connect/daily_transacations/presentation/widgets/arrow_inward.dart';
 import 'package:threefold_connect/theme/theme.dart';
 
 class TransactionWidget extends StatelessWidget {
@@ -26,10 +27,12 @@ class TransactionWidget extends StatelessWidget {
           CircleAvatar(
             backgroundColor:
                 isIncoming ? Theme.of(context).primaryColor : brightRed,
-            child: Icon(
-              isIncoming ? Icons.arrow_downward : Icons.arrow_upward,
-              color: Colors.white,
-            ),
+            child: isIncoming
+                ? const ArrowInward()
+                : const Icon(
+                    Icons.arrow_outward,
+                    color: Colors.white,
+                  ),
           ),
           const SizedBox(width: 8),
           Expanded(
