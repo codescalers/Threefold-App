@@ -3,7 +3,6 @@ import 'package:threefold_connect/features/dao%20page/data/dao_card_model.dart';
 import 'package:threefold_connect/features/dao%20page/data/dummy_data.dart';
 import 'package:threefold_connect/features/dao%20page/presentation/widgets/dao_card.dart';
 
-
 class ExecutableWidget extends StatefulWidget {
   const ExecutableWidget({super.key});
 
@@ -12,15 +11,15 @@ class ExecutableWidget extends StatefulWidget {
 }
 
 class _ExecutableWidgetState extends State<ExecutableWidget> {
-  List<DaoCardDetails> daoList=[];
+  List<DaoCardDetails> daoList = [];
 
   @override
   void initState() {
     // TODO: Fetch list an update it and remove this dummy data line
-    daoList= daoDetailsList;   
+    daoList = daoDetailsList;
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +32,6 @@ class _ExecutableWidgetState extends State<ExecutableWidget> {
     );
   }
 }
-
 
 List<DaoCard> _buildDaoCardList(List<DaoCardDetails> list) {
   return list.map((item) {

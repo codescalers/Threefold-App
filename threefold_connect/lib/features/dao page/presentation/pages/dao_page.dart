@@ -18,25 +18,25 @@ class _DaoPageState extends State<DaoPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: const MyAppBar( title: 'Dao'), 
+        appBar: const MyAppBar(title: 'Dao'),
         body: Column(
           children: [
             PreferredSize(
-            preferredSize: const Size.fromHeight(50.0),
-            child: Container(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: TabBar(
-                labelColor: Theme.of(context).colorScheme.primary,
-                indicatorColor: Theme.of(context).colorScheme.primary, 
-                unselectedLabelColor: white,
-                dividerColor: Theme.of(context).scaffoldBackgroundColor,
-                tabs: const [
-                  Tab(text: 'Active'),
-                  Tab(text: 'Executable'),
-                ],
+              preferredSize: const Size.fromHeight(50.0),
+              child: Container(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: TabBar(
+                  labelColor: Theme.of(context).colorScheme.primary,
+                  indicatorColor: Theme.of(context).colorScheme.primary,
+                  unselectedLabelColor: white,
+                  dividerColor: Theme.of(context).scaffoldBackgroundColor,
+                  tabs: const [
+                    Tab(text: 'Active'),
+                    Tab(text: 'Executable'),
+                  ],
+                ),
               ),
             ),
-          ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: SizedBox(
@@ -48,7 +48,8 @@ class _DaoPageState extends State<DaoPage> {
                       color: grey,
                     )
                   ],
-                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.secondary),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).colorScheme.secondary),
                   hintText: "Search by proposal description",
                   hintStyle: MaterialStateProperty.all<TextStyle>(
                       TextStyle(color: grey, fontFamily: inter, fontSize: 14)),

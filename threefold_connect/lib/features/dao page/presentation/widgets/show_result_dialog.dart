@@ -65,10 +65,8 @@ class _ShowResultDialogState extends State<ShowResultDialog>
       ),
       backgroundColor: backgroundGrey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30 , horizontal: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min, 
-          children: [
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
           Stack(
             alignment: Alignment.center,
             children: [

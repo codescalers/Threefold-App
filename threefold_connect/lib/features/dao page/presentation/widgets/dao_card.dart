@@ -3,7 +3,6 @@ import 'package:threefold_connect/features/dao%20page/presentation/widgets/show_
 import 'package:threefold_connect/features/dao%20page/presentation/widgets/vote_dialog.dart';
 import 'package:threefold_connect/theme/theme.dart';
 
-
 class DaoCard extends StatefulWidget {
   final String text;
   final String description;
@@ -114,7 +113,8 @@ class _DaoCardState extends State<DaoCard> {
               TextButton(
                 onPressed: () {
                   showDialog(
-                      context: context, builder: (_) => const ShowResultDialog());
+                      context: context,
+                      builder: (_) => const ShowResultDialog());
                 },
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(

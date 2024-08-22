@@ -39,7 +39,7 @@ class _VoteDialogState extends State<VoteDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0), 
+        borderRadius: BorderRadius.circular(0),
       ),
       backgroundColor: backgroundGrey,
       child: Padding(
@@ -60,7 +60,8 @@ class _VoteDialogState extends State<VoteDialog> {
                   fillColor: secondryColor,
                 ),
                 menuStyle: MenuStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.secondary),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).colorScheme.secondary),
                 ),
                 label: Text(
                   'Select Farm',
