@@ -63,7 +63,7 @@ class _DaoCardState extends State<DaoCard> {
                   borderRadius: BorderRadius.circular(2),
                 ),
                 side: const BorderSide(
-                  color: teritaryColor,
+                  color: tertiaryColor,
                 ),
               ),
               child: SizedBox(

@@ -57,7 +57,7 @@ class _VoteDialogState extends State<VoteDialog> {
                 textStyle: TextStyle(color: white, fontFamily: interBold),
                 inputDecorationTheme: const InputDecorationTheme(
                   filled: true,
-                  fillColor: secondryColor,
+                  fillColor: secondaryColor,
                 ),
                 menuStyle: MenuStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(

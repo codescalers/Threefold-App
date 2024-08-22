@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 // Colors
 const primaryColor = Color(0xFF1AA18F);
-const secondryColor = Color(0xFF212121);
-const teritaryColor = Color(0xFF74DDC3);
+const secondaryColor = Color(0xFF212121);
+const tertiaryColor = Color(0xFF74DDC3);
 const backgroundColor = Color(0xFF383434);
 const white = Color(0xFFFFFFFF);
 const darkred = Color(0xFFA11A1A);
@@ -34,8 +34,8 @@ ThemeData threefoldTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: backgroundColor,
     primary: primaryColor,
-    secondary: secondryColor,
-    tertiary: teritaryColor,
+    secondary: secondaryColor,
+    tertiary: tertiaryColor,
     surfaceTint: Colors.transparent,
   ),
   textTheme: const TextTheme(headlineMedium: TextStyle(color: white)),
