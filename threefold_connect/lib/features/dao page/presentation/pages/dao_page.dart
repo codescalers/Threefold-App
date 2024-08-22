@@ -18,7 +18,7 @@ class _DaoPageState extends State<DaoPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: const MyAppBar( title: 'Dao page'), 
+        appBar: const MyAppBar( title: 'Dao'), 
         body: Column(
           children: [
             PreferredSize(
@@ -27,7 +27,7 @@ class _DaoPageState extends State<DaoPage> {
               color: Theme.of(context).scaffoldBackgroundColor,
               child: TabBar(
                 labelColor: Theme.of(context).colorScheme.primary,
-                indicatorColor: primaryColor, 
+                indicatorColor: Theme.of(context).colorScheme.primary, 
                 unselectedLabelColor: white,
                 dividerColor: Theme.of(context).scaffoldBackgroundColor,
                 tabs: const [
@@ -48,7 +48,7 @@ class _DaoPageState extends State<DaoPage> {
                       color: grey,
                     )
                   ],
-                  backgroundColor: MaterialStateProperty.all<Color>(secondryColor),
+                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.secondary),
                   hintText: "Search by proposal description",
                   hintStyle: MaterialStateProperty.all<TextStyle>(
                       TextStyle(color: grey, fontFamily: inter, fontSize: 14)),

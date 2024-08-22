@@ -72,7 +72,7 @@ class _DaoCardState extends State<DaoCard> {
                 child: Text(
                   'Go to proposal',
                   style: TextStyle(
-                    color: teritaryColor,
+                    color: Theme.of(context).colorScheme.tertiary,
                     fontFamily: interBold,
                   ),
                   textAlign: TextAlign.center,
@@ -139,7 +139,7 @@ class _DaoCardState extends State<DaoCard> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  backgroundColor: primaryColor,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
                 child: Text(
                   'Vote',

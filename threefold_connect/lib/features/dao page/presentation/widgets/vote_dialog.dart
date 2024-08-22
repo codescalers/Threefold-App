@@ -60,7 +60,7 @@ class _VoteDialogState extends State<VoteDialog> {
                   fillColor: secondryColor,
                 ),
                 menuStyle: MenuStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(secondryColor),
+                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.secondary),
                 ),
                 label: Text(
                   'Select Farm',

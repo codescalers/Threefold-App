@@ -78,7 +78,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
                   return LinearProgressIndicator(
                     minHeight: 40,
                     value: _thresholdAnimation.value,
-                    color: primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                     backgroundColor: backgroundColor,
                   );
                 },
@@ -123,7 +123,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
             builder: (context, child) {
               return LinearProgressIndicator(
                 value: _yesAnimation.value,
-                color: primaryColor,
+                color: Theme.of(context).colorScheme.primary,
                 backgroundColor: grey,
               );
             },
