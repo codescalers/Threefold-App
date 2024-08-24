@@ -9,6 +9,8 @@ const backgroundColor = Color(0xFF383434);
 const white = Color(0xFFFFFFFF);
 const darkred = Color(0xFFA11A1A);
 const grey = Color(0xFF818181);
+const brightRed = Color.fromARGB(255, 255, 0, 0);
+const darkgrey = Color(0xFF504c4c);
 
 // Fonts
 var poppins = GoogleFonts.poppins().fontFamily;
@@ -16,6 +18,10 @@ var inter = GoogleFonts.inter().fontFamily;
 var interBold = GoogleFonts.inter(fontWeight: FontWeight.bold).fontFamily;
 
 ThemeData threefoldTheme = ThemeData(
+  dividerTheme: const DividerThemeData(
+    color: primaryColor,
+    thickness: 0.5,
+  ),
   appBarTheme: const AppBarTheme(
     backgroundColor: primaryColor,
     titleTextStyle: TextStyle(
