@@ -35,6 +35,7 @@ class _DailyTransactionsPageState extends State<DailyTransactionsPage> {
         body: Column(
           children: [
             const WalletInfoHeader(email: 'Daily@username'),
+            const Divider(),
             const SizedBox(height: 16),
             FilterWidget(
               currencies: currencies,

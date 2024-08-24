@@ -31,7 +31,7 @@ class Footer extends StatelessWidget {
         margin: const EdgeInsets.all(8.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF504c4c),
+            backgroundColor: darkgrey,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0),
             ),
