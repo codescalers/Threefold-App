@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:threefold_connect/features/dao%20page/data/dao_card_model.dart';
-import 'package:threefold_connect/features/dao%20page/data/dummy_data.dart';
+import 'package:tfchain_client/models/dao.dart';
 import 'package:threefold_connect/features/dao%20page/presentation/widgets/dao_card.dart';
 
+
+// ignore: must_be_immutable
 class ExecutableWidget extends StatefulWidget {
-  const ExecutableWidget({super.key});
+  List<Proposal>? inactiveProposals;
+  ExecutableWidget({super.key , required this.inactiveProposals});
 
   @override
   State<ExecutableWidget> createState() => _ExecutableWidgetState();
 }
 
 class _ExecutableWidgetState extends State<ExecutableWidget> {
-  List<DaoCardDetails> daoList = [];
-
+  List<Proposal>? inactiveProposals;
   @override
   void initState() {
-    // TODO: Fetch list an update it and remove this dummy data line
-    daoList = daoDetailsList;
+    inactiveProposals = widget.inactiveProposals;
     super.initState();
+  }
+
+
+    @override
+  void didUpdateWidget(covariant ExecutableWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.inactiveProposals != oldWidget.inactiveProposals) {
+      setState(() {
+        inactiveProposals = widget.inactiveProposals;
+      });
+    }
   }
 
   @override
@@ -26,19 +37,18 @@ class _ExecutableWidgetState extends State<ExecutableWidget> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: _buildDaoCardList(daoList),
+          children: _buildDaoCardList(inactiveProposals) ?? [const Text('No active proposal at the moment')],
         ),
       ),
     );
   }
 }
 
-List<DaoCard> _buildDaoCardList(List<DaoCardDetails> list) {
-  return list.map((item) {
+List<DaoCard>? _buildDaoCardList(List<Proposal>? list) {
+  return list?.map((item) {
     return DaoCard(
-      text: item.text,
-      description: item.description,
-      date: item.date,
+      proposal: item,
     );
   }).toList();
 }
+  

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tfchain_client/models/dao.dart';
 import 'package:threefold_connect/features/dao%20page/presentation/widgets/active_widget.dart';
 import 'package:threefold_connect/features/dao%20page/presentation/widgets/executable_widget.dart';
 import 'package:threefold_connect/theme/theme.dart';
 import 'package:threefold_connect/widgets/app_bar.dart';
+
+import '../../data/get_dao.dart';
 
 class DaoPage extends StatefulWidget {
   const DaoPage({super.key});
@@ -11,8 +14,24 @@ class DaoPage extends StatefulWidget {
   State<DaoPage> createState() => _DaoPageState();
 }
 
-//TODO : Executable page
 class _DaoPageState extends State<DaoPage> {
+  List<Proposal>? activeList = [];
+  List<Proposal>? inactiveList = [];
+
+  void setActiveList() async {
+    final proposals = await getProposals();
+    setState(() {
+      activeList = proposals['activeProposals'];
+      inactiveList = proposals['inactiveProposals'];
+    });
+  }
+
+  @override
+  void initState() {
+    setActiveList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -42,6 +61,7 @@ class _DaoPageState extends State<DaoPage> {
               child: SizedBox(
                 height: 40,
                 child: SearchBar(
+                  // onChanged: filter
                   trailing: const <Widget>[
                     Icon(
                       Icons.search,
@@ -63,11 +83,13 @@ class _DaoPageState extends State<DaoPage> {
                 ),
               ),
             ),
-            const Expanded(
+            Expanded(
               child: TabBarView(
                 children: [
-                  ActiveWidget(),
-                  ExecutableWidget(),
+                  ActiveWidget(activeProposals: activeList),
+                  ExecutableWidget(
+                    inactiveProposals: inactiveList,
+                  ),
                 ],
               ),
             ),

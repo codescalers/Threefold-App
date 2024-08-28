@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:threefold_connect/features/dao%20page/presentation/widgets/show_result_dialog.dart';
-import 'package:threefold_connect/features/dao%20page/presentation/widgets/vote_dialog.dart';
+import 'package:tfchain_client/models/dao.dart';
 import 'package:threefold_connect/theme/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../data/get_proposal_votes.dart';
+import 'show_result_dialog.dart';
+import 'vote_dialog.dart';
 
 class DaoCard extends StatefulWidget {
-  final String text;
-  final String description;
-  final String date;
+  final Proposal proposal;
+
   const DaoCard({
-    required this.text,
-    required this.description,
-    required this.date,
+    required this.proposal,
     super.key,
   });
 
@@ -19,6 +20,18 @@ class DaoCard extends StatefulWidget {
 }
 
 class _DaoCardState extends State<DaoCard> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> _launchUrl() async {
+    final Uri _url = Uri.parse(widget.proposal.link);
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,10 +44,11 @@ class _DaoCardState extends State<DaoCard> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              widget.text,
+              widget.proposal.action,
               style: TextStyle(
                 color: white,
-                fontFamily: inter,
+                fontFamily: interBold,
+                fontSize: 16,
               ),
               textAlign: TextAlign.start,
             ),
@@ -46,7 +60,7 @@ class _DaoCardState extends State<DaoCard> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              widget.description,
+              widget.proposal.description,
               style: TextStyle(
                 color: white,
                 fontFamily: inter,
@@ -57,7 +71,7 @@ class _DaoCardState extends State<DaoCard> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: TextButton(
-              onPressed: () {},
+              onPressed: _launchUrl,
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(2),
@@ -98,7 +112,7 @@ class _DaoCardState extends State<DaoCard> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                widget.date,
+                widget.proposal.end.formatDateTime(),
                 style: TextStyle(
                   color: white,
                   fontFamily: inter,
@@ -110,42 +124,61 @@ class _DaoCardState extends State<DaoCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (_) => const ShowResultDialog());
-                },
-                style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
+              SizedBox(
+                child: TextButton(
+                  onPressed: () async {
+                    final votes = await getProposalVotes(widget.proposal.hash);
+                    // ignore: use_build_context_synchronously
+                    showDialog(
+                        context: context,
+                        builder: (_) => ShowResultDialog(
+                              totalVotes: votes.ayes.length + votes.nays.length,
+                              noVotes: votes.nays.length,
+                              yesVotes: votes.ayes.length,
+                              threshold: votes.threshold,
+                            ));
+                  },
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    backgroundColor: backgroundColor,
                   ),
-                  backgroundColor: backgroundColor,
-                ),
-                child: Text(
-                  'Show result',
-                  style: TextStyle(
-                    color: white,
-                    fontFamily: interBold,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      'Show result',
+                      style: TextStyle(
+                        color: white,
+                        fontFamily: interBold,
+                      ),
+                    ),
                   ),
                 ),
               ),
               TextButton(
                 onPressed: () {
                   showDialog(
-                      context: context, builder: (_) => const VoteDialog());
+                      context: context,
+                      builder: (_) => VoteDialog(
+                            proposal: widget.proposal,
+                          ));
                 },
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
-                child: Text(
-                  'Vote',
-                  style: TextStyle(
-                    color: white,
-                    fontFamily: interBold,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Vote',
+                    style: TextStyle(
+                      color: white,
+                      fontFamily: interBold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),

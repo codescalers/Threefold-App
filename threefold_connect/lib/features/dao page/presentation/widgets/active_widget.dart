@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:threefold_connect/features/dao%20page/data/dao_card_model.dart';
-import 'package:threefold_connect/features/dao%20page/data/dummy_data.dart';
-import 'package:threefold_connect/features/dao%20page/presentation/widgets/dao_card.dart';
+import 'package:tfchain_client/models/dao.dart';
+
+import 'dao_card.dart';
 
 class ActiveWidget extends StatefulWidget {
-  const ActiveWidget({super.key});
+  List<Proposal>? activeProposals;
+  ActiveWidget({super.key, required this.activeProposals});
 
   @override
   State<ActiveWidget> createState() => _ActiveWidgetState();
 }
 
 class _ActiveWidgetState extends State<ActiveWidget> {
-  List<DaoCardDetails> daoList = [];
+  List<Proposal>? activeProposals=[];
 
   @override
   void initState() {
-    // TODO: Fetch list an update it and remove this dummy data line
-    daoList = daoDetailsList;
+    activeProposals = widget.activeProposals;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ActiveWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.activeProposals != oldWidget.activeProposals) {
+      setState(() {
+        activeProposals = widget.activeProposals;
+      });
+    }
   }
 
   @override
@@ -26,19 +36,18 @@ class _ActiveWidgetState extends State<ActiveWidget> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: _buildDaoCardList(daoList),
+          children: _buildDaoCardList(activeProposals) ??
+              [const Text('No active proposal at the moment')],
         ),
       ),
     );
   }
 }
 
-List<DaoCard> _buildDaoCardList(List<DaoCardDetails> list) {
-  return list.map((item) {
+List<DaoCard>? _buildDaoCardList(List<Proposal>? list) {
+  return list?.map((item) {
     return DaoCard(
-      text: item.text,
-      description: item.description,
-      date: item.date,
+      proposal: item,
     );
   }).toList();
 }

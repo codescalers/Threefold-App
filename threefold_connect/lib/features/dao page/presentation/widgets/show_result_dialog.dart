@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:threefold_connect/theme/theme.dart';
 
 class ShowResultDialog extends StatefulWidget {
-  const ShowResultDialog({super.key});
+  final int totalVotes;
+  final int noVotes;
+  final int yesVotes;
+  final int threshold;
+  const ShowResultDialog({
+    required this.threshold,
+    required this.noVotes,
+    required this.yesVotes,
+    required this.totalVotes,
+    super.key,
+  });
 
   @override
   State<ShowResultDialog> createState() => _ShowResultDialogState();
@@ -13,20 +23,12 @@ class _ShowResultDialogState extends State<ShowResultDialog>
   late AnimationController _animationController;
   late Animation<double> _noAnimation;
   late Animation<double> _yesAnimation;
-  late Animation<double> _thresholdAnimation;
-  int got = 0;
-  int total = 0;
-  int yes = 0;
-  int no = 0;
+  late Animation<double> _Animation;
+
+
 
   @override
   void initState() {
-    //TODO: Fetch api to get number of yes, no , got , total  and remove dummy data below
-    got = 1;
-    total = 5;
-    yes = 60;
-    no = 40;
-
     _animationController = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
@@ -34,17 +36,22 @@ class _ShowResultDialogState extends State<ShowResultDialog>
 
     _noAnimation = Tween<double>(
       begin: 0.0,
-      end: (no / (yes + no)),
+      end: widget.totalVotes != 0
+          ? (widget.noVotes /widget.totalVotes * 1.0)
+          : 0,
     ).animate(_animationController);
 
     _yesAnimation = Tween<double>(
       begin: 0.0,
-      end: (yes / (yes + no)),
+      end: widget.totalVotes != 0
+          ? (widget.yesVotes / widget.totalVotes * 1.0)
+          : 0,
     ).animate(_animationController);
 
-    _thresholdAnimation = Tween<double>(
+    _Animation = Tween<double>(
       begin: 0.0,
-      end: (got / total),
+      end: (widget.totalVotes /
+          widget.threshold),
     ).animate(_animationController);
 
     _animationController.forward();
@@ -63,7 +70,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0),
       ),
-      backgroundColor: backgroundGrey,
+      backgroundColor: secondaryColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -75,15 +82,16 @@ class _ShowResultDialogState extends State<ShowResultDialog>
                 builder: (context, child) {
                   return LinearProgressIndicator(
                     minHeight: 40,
-                    value: _thresholdAnimation.value,
+                    value: _Animation.value,
                     color: Theme.of(context).colorScheme.primary,
                     backgroundColor: backgroundColor,
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
                   );
                 },
               ),
               Center(
                 child: Text(
-                  'Threshold $got/$total',
+                  'threshold ${widget.totalVotes} / ${widget.threshold}',
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: inter,
@@ -106,7 +114,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
                 ),
               ),
               Text(
-                '${(yes / (yes + no)) * 100}%',
+                widget.totalVotes==0 ? '0%':'${(widget.yesVotes / widget.totalVotes) * 100}%',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: inter,
@@ -139,7 +147,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
                 ),
               ),
               Text(
-                '${(no / (yes + no)) * 100}%',
+                 widget.totalVotes==0 ? '0%': '${widget.noVotes /  widget.totalVotes* 100}%',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: inter,

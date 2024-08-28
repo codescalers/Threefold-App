@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tfchain_client/models/dao.dart';
 
 import '../../../../theme/theme.dart';
-import '../../data/dummy_data.dart';
+import '../../data/vote.dart';
 
 class VoteDialog extends StatefulWidget {
-  const VoteDialog({super.key});
+  final Proposal proposal;
+  const VoteDialog({
+    required this.proposal,
+    super.key,
+  });
 
   @override
   State<VoteDialog> createState() => _VoteDialogState();
@@ -17,7 +22,7 @@ class _VoteDialogState extends State<VoteDialog> {
   @override
   void initState() {
     // TODO: Fetch Farms List and remove this dummy data
-    farms = farmList;
+    //farms = farmList;
     super.initState();
   }
 
@@ -41,7 +46,7 @@ class _VoteDialogState extends State<VoteDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0),
       ),
-      backgroundColor: backgroundGrey,
+      backgroundColor: secondaryColor,
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Flex(
@@ -57,11 +62,22 @@ class _VoteDialogState extends State<VoteDialog> {
                 textStyle: TextStyle(color: white, fontFamily: interBold),
                 inputDecorationTheme: const InputDecorationTheme(
                   filled: true,
-                  fillColor: secondaryColor,
+                  fillColor: backgroundColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
                 menuStyle: MenuStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      Theme.of(context).colorScheme.secondary),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(backgroundColor),
+                  surfaceTintColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>( 
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
                 ),
                 label: Text(
                   'Select Farm',
@@ -80,8 +96,8 @@ class _VoteDialogState extends State<VoteDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed: () {
-                    //TODO: Call api to vote Yes
+                  onPressed: () async {
+                    //vote(true, widget.proposal.hash, 4979); // Fix FarmID
                     Navigator.pop(context);
                   },
                   style: TextButton.styleFrom(
@@ -99,15 +115,15 @@ class _VoteDialogState extends State<VoteDialog> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    //TODO: Call api to vote No
+                  onPressed: () async {
+                    //vote(false, widget.proposal.hash, 0); // Fix FarmID
                     Navigator.pop(context);
                   },
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    backgroundColor: backgroundColor,
                   ),
                   child: Text(
                     'No',
