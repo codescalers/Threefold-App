@@ -25,8 +25,6 @@ class _ShowResultDialogState extends State<ShowResultDialog>
   late Animation<double> _yesAnimation;
   late Animation<double> _animation;
 
-
-
   @override
   void initState() {
     _animationController = AnimationController(
@@ -37,7 +35,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
     _noAnimation = Tween<double>(
       begin: 0.0,
       end: widget.totalVotes != 0
-          ? (widget.noVotes /widget.totalVotes * 1.0)
+          ? (widget.noVotes / widget.totalVotes * 1.0)
           : 0,
     ).animate(_animationController);
 
@@ -50,8 +48,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
 
     _animation = Tween<double>(
       begin: 0.0,
-      end: (widget.totalVotes /
-          widget.threshold),
+      end: (widget.totalVotes / widget.threshold),
     ).animate(_animationController);
 
     _animationController.forward();
@@ -114,7 +111,9 @@ class _ShowResultDialogState extends State<ShowResultDialog>
                 ),
               ),
               Text(
-                widget.totalVotes==0 ? '0%':'${(widget.yesVotes / widget.totalVotes) * 100}%',
+                widget.totalVotes == 0
+                    ? '0%'
+                    : '${(widget.yesVotes / widget.totalVotes) * 100}%',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: inter,
@@ -147,7 +146,9 @@ class _ShowResultDialogState extends State<ShowResultDialog>
                 ),
               ),
               Text(
-                 widget.totalVotes==0 ? '0%': '${widget.noVotes /  widget.totalVotes* 100}%',
+                widget.totalVotes == 0
+                    ? '0%'
+                    : '${widget.noVotes / widget.totalVotes * 100}%',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: inter,

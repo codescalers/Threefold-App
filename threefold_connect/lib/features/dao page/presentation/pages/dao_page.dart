@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tfchain_client/models/dao.dart';
-import 'package:threefold_connect/features/dao%20page/presentation/widgets/active_executable_widget.dart';
 import 'package:threefold_connect/theme/theme.dart';
 import 'package:threefold_connect/widgets/app_bar.dart';
-
-import '../../data/get_dao.dart';
+import '../../data/get_dao_proposals.dart';
+import '../widgets/active_executable_widget.dart';
 
 class DaoPage extends StatefulWidget {
   const DaoPage({super.key});

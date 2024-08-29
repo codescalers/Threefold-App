@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gridproxy_client/models/farms.dart';
 import 'package:tfchain_client/models/dao.dart';
 
 import '../../../../theme/theme.dart';
+import '../../data/get_farms_list.dart';
 import '../../data/vote.dart';
 
 class VoteDialog extends StatefulWidget {
@@ -16,24 +18,29 @@ class VoteDialog extends StatefulWidget {
 }
 
 class _VoteDialogState extends State<VoteDialog> {
-  String selectedFarm = "";
-  List<String> farms = [];
+  int? farmId;
+  List<Farm> farms = [];
+
+  void setFarms() async {
+    List<Farm> farmsList = await getMyFarms(8711);  //TODO: replace with actual twin id 
+    setState(() {
+      farms = farmsList;
+    });
+  }
 
   @override
   void initState() {
-    // TODO: Fetch Farms List and remove this dummy data
-    //farms = farmList;
+    setFarms();
     super.initState();
   }
 
-  List<DropdownMenuEntry<String>> _buildDropdownMenuEntries(
-      List<String> farms) {
+  List<DropdownMenuEntry<int>> _buildDropdownMenuEntries(List<Farm> farms) {
     return farms.map((farm) {
-      return DropdownMenuEntry<String>(
-        value: farm,
-        label: farm,
+      return DropdownMenuEntry<int>(
+        value: farm.farmID,
+        label: farm.name,
         labelWidget: Text(
-          farm,
+          farm.name,
           style: TextStyle(color: Colors.white, fontFamily: interBold),
         ),
       );
@@ -73,7 +80,7 @@ class _VoteDialogState extends State<VoteDialog> {
                       MaterialStateProperty.all<Color>(backgroundColor),
                   surfaceTintColor:
                       MaterialStateProperty.all<Color>(Colors.transparent),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>( 
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
@@ -84,9 +91,9 @@ class _VoteDialogState extends State<VoteDialog> {
                   style: TextStyle(color: white, fontFamily: interBold),
                 ),
                 dropdownMenuEntries: _buildDropdownMenuEntries(farms),
-                onSelected: (String? value) {
+                onSelected: (int? value) {
                   if (value != null) {
-                    selectedFarm = value;
+                    farmId = value;
                   }
                 },
               ),
@@ -97,7 +104,9 @@ class _VoteDialogState extends State<VoteDialog> {
               children: [
                 TextButton(
                   onPressed: () async {
-                    vote(true, widget.proposal.hash, 4979); // Fix FarmID
+                    if (farmId != null) {
+                      vote(true, widget.proposal.hash, farmId!);
+                    }
                     Navigator.pop(context);
                   },
                   style: TextButton.styleFrom(
@@ -116,7 +125,9 @@ class _VoteDialogState extends State<VoteDialog> {
                 ),
                 TextButton(
                   onPressed: () async {
-                    vote(false, widget.proposal.hash, 0); // Fix FarmID
+                    if (farmId != null) {
+                      vote(false, widget.proposal.hash, farmId!);
+                    }
                     Navigator.pop(context);
                   },
                   style: TextButton.styleFrom(

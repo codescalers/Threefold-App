@@ -39,8 +39,7 @@ class _ActiveOrExecutableWidgetState extends State<ActiveOrExecutableWidget> {
         setState(() {
           proposals = widget.proposals;
         });
-      }
-      else if (widget.proposals != null) {
+      } else if (widget.proposals != null) {
         setState(() {
           proposals = widget.proposals
               ?.where((Proposal entry) =>
@@ -50,7 +49,6 @@ class _ActiveOrExecutableWidgetState extends State<ActiveOrExecutableWidget> {
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {

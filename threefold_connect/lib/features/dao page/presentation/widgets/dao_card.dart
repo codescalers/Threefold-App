@@ -26,9 +26,14 @@ class _DaoCardState extends State<DaoCard> {
   }
 
   Future<void> _launchUrl() async {
-    final Uri url = Uri.parse(widget.proposal.link);
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
+    if (widget.proposal.link != "")  {
+      final Uri url = Uri.parse(widget.proposal.link);
+      if (!await launchUrl(url)) {
+        const SnackBar(
+          content: Text(
+              "Can't go to proposal at this moment please try again later"),
+        );
+      }
     }
   }
 
