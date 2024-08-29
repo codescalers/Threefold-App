@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gridproxy_client/models/farms.dart';
 import 'package:tfchain_client/models/dao.dart';
@@ -22,7 +23,8 @@ class _VoteDialogState extends State<VoteDialog> {
   List<Farm> farms = [];
 
   void setFarms() async {
-    List<Farm> farmsList = await getMyFarms(8711);  //TODO: replace with actual twin id 
+    List<Farm> farmsList =
+        await getMyFarms(0); //TODO: replace with actual twin id
     setState(() {
       farms = farmsList;
     });
@@ -60,50 +62,65 @@ class _VoteDialogState extends State<VoteDialog> {
           direction: Axis.vertical,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
-              fit: FlexFit.loose,
-              child: DropdownMenu(
-                menuHeight: MediaQuery.sizeOf(context).width * 0.5,
-                enableFilter: true,
-                width: MediaQuery.sizeOf(context).width * 0.6,
-                textStyle: TextStyle(color: white, fontFamily: interBold),
-                inputDecorationTheme: const InputDecorationTheme(
-                  filled: true,
-                  fillColor: backgroundColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                menuStyle: MenuStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(backgroundColor),
-                  surfaceTintColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                  ),
-                ),
-                label: Text(
-                  'Select Farm',
-                  style: TextStyle(color: white, fontFamily: interBold),
-                ),
-                dropdownMenuEntries: _buildDropdownMenuEntries(farms),
-                onSelected: (int? value) {
-                  if (value != null) {
-                    farmId = value;
-                  }
-                },
+            DropdownMenu(
+              menuHeight: MediaQuery.sizeOf(context).height * 0.3,
+              enableFilter: true,
+              width: MediaQuery.sizeOf(context).width * 0.55,
+              textStyle:
+                  TextStyle(color: white, fontFamily: interBold, fontSize: 14),
+              trailingIcon: const Icon(
+                CupertinoIcons.chevron_down,
+                color: white,
+                size: 18,
               ),
+              selectedTrailingIcon: const Icon(
+                CupertinoIcons.chevron_up,
+                color: white,
+                size: 18,
+              ),
+              inputDecorationTheme: const InputDecorationTheme(
+                filled: true,
+                fillColor: backgroundColor,
+                enabledBorder: UnderlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderSide: BorderSide(
+                    color: secondaryColor,
+                    width: 8.0,
+                  ),
+                ),
+                contentPadding: EdgeInsets.only(right: 5, left: 15),
+              ),
+              menuStyle: MenuStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(backgroundColor),
+                surfaceTintColor:
+                    MaterialStateProperty.all<Color>(Colors.transparent),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                  ),
+                ),
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.only(right: 5, left: 15, bottom: 5)),
+              ),
+              label: Text(
+                'Select Farm',
+                style: TextStyle(
+                    color: white, fontFamily: interBold, fontSize: 14),
+              ),
+              dropdownMenuEntries: _buildDropdownMenuEntries(farms),
+              onSelected: (int? value) {
+                if (value != null) {
+                  farmId = value;
+                }
+              },
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed: () async {
+                  onPressed: () {
                     if (farmId != null) {
                       vote(true, widget.proposal.hash, farmId!);
                     }
@@ -124,7 +141,7 @@ class _VoteDialogState extends State<VoteDialog> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () async {
+                  onPressed: () {
                     if (farmId != null) {
                       vote(false, widget.proposal.hash, farmId!);
                     }

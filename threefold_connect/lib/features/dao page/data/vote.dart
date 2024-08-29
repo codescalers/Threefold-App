@@ -2,8 +2,7 @@ import 'package:tfchain_client/generated/dev/types/pallet_dao/proposal/dao_votes
 import 'package:tfchain_client/tfchain_client.dart';
 
 //TODO: mnemonic need to be changed with user mnemonic
-const mnemonic =
-    "print also path fish pizza cannon seminar prison piano merry endorse flight";
+const mnemonic = "";
 
 Future<DaoVotes> vote(bool vote, String hash, int farmId) async {
   try {
