@@ -97,7 +97,7 @@ class _VoteDialogState extends State<VoteDialog> {
               children: [
                 TextButton(
                   onPressed: () async {
-                    //vote(true, widget.proposal.hash, 4979); // Fix FarmID
+                    vote(true, widget.proposal.hash, 4979); // Fix FarmID
                     Navigator.pop(context);
                   },
                   style: TextButton.styleFrom(
@@ -116,7 +116,7 @@ class _VoteDialogState extends State<VoteDialog> {
                 ),
                 TextButton(
                   onPressed: () async {
-                    //vote(false, widget.proposal.hash, 0); // Fix FarmID
+                    vote(false, widget.proposal.hash, 0); // Fix FarmID
                     Navigator.pop(context);
                   },
                   style: TextButton.styleFrom(

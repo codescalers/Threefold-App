@@ -23,7 +23,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
   late AnimationController _animationController;
   late Animation<double> _noAnimation;
   late Animation<double> _yesAnimation;
-  late Animation<double> _Animation;
+  late Animation<double> _animation;
 
 
 
@@ -48,7 +48,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
           : 0,
     ).animate(_animationController);
 
-    _Animation = Tween<double>(
+    _animation = Tween<double>(
       begin: 0.0,
       end: (widget.totalVotes /
           widget.threshold),
@@ -82,7 +82,7 @@ class _ShowResultDialogState extends State<ShowResultDialog>
                 builder: (context, child) {
                   return LinearProgressIndicator(
                     minHeight: 40,
-                    value: _Animation.value,
+                    value: _animation.value,
                     color: Theme.of(context).colorScheme.primary,
                     backgroundColor: backgroundColor,
                     borderRadius: const BorderRadius.all(Radius.circular(5)),
