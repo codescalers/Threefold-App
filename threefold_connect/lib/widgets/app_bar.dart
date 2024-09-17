@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/theme.dart';
+
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
@@ -8,7 +10,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyle(fontFamily: interBold, fontSize: 16),
+      ),
       leading: IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () {},
